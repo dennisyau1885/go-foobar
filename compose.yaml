@@ -1,0 +1,10 @@
+version: '3'
+services:
+  goapp:
+    build: .
+    image: go-foobar
+    container_name: go-foobar
+    ports:
+      - "7070:8080"
+    environment:
+      FOOBAR: ${FOOBAR}  # Set your desired value for FOOBAR here
