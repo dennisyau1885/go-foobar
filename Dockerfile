@@ -2,7 +2,7 @@
 FROM golang:latest AS builder
 WORKDIR /app
 COPY . .
-RUN go mod init main
+RUN go mod init main || go mod tidy
 RUN go mod download
 #RUN gCGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o main
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" main

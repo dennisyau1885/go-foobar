@@ -1,13 +1,15 @@
+.PHONY: all build clean down up restart sleep test_ci test retest
+
 all: build restart sleep test
 
-build:
-	docker compose build
+build down:
+	docker compose $@
+
+clean:
+	docker image rm -f go-foobar:latest || true
 
 up:
 	docker compose up -d
-
-down:
-	docker compose down
 
 restart: down up
 
@@ -26,3 +28,4 @@ test:
 	curl -s localhost:7070 | grep foobar
 
 retest: restart sleep test
+
